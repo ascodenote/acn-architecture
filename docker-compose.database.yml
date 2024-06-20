@@ -1,0 +1,22 @@
+version: '3'
+
+volumes:
+  postgresql_data:
+    driver: local
+
+services:
+  postgresql:
+    image: postgres
+    container_name: postgresql
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    env_file:
+      - env/database.env
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+    restart: unless-stopped
