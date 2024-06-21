@@ -3,6 +3,8 @@ version: '3'
 volumes:
   nginx_data:
     driver: local
+  letsencrypt_data:
+    driver: local
 
 services:
   nginx:
@@ -15,3 +17,9 @@ services:
     volumes:
       - nginx_data:/data
       - letsencrypt_data:/etc/letsencrypt
+    networks:
+      - acn-net
+
+networks:
+  acn-net:
+    driver: bridge
